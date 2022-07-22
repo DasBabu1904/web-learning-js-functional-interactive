@@ -23,7 +23,7 @@ function UpDateBalance(val, Changetype) {
     if (Changetype == 'credit') {
         BalanceField.innerText = BalanceVal + val;
     }
-    else if (Changetype == 'debit') {
+    else if (Changetype == 'debit' && BalanceVal >= val) {
         BalanceField.innerText = BalanceVal - val;
     }
 
@@ -44,9 +44,10 @@ document.getElementById("deposit-submit-button").addEventListener("click", funct
 document.getElementById("withdraw-submit-button").addEventListener('click', function () {
 
     const withdrawTk = FindValueID('withdraw-ammount-in-tk');
-    if (withdrawTk > 0) {
+    if (withdrawTk > 0 && FindTextID('total-balance') > withdrawTk) {
         UpDateField("total-withdraw", withdrawTk);
         UpDateBalance(withdrawTk, 'debit');
+
     }
 
 })
